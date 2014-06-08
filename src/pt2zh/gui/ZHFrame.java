@@ -21,7 +21,7 @@ public class ZHFrame extends JFrame {
 
     public ZHFrame() throws HeadlessException {
         
-        setTitle("Éles ZH");
+        setTitle("Generic ZH");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocation(40, 60);
         setSize(700, 300);
@@ -29,9 +29,8 @@ public class ZHFrame extends JFrame {
         JToolBar jToolBar = new JToolBar();
         
         getContentPane().add(jToolBar, BorderLayout.NORTH);
-        JTable albumTable = new JTable();
-        
-        String[] fi =  {"nev","lakossag","terulte","vars","asd"};
+        JTable albumTable = new JTable();        
+      
         albumTableModel = new GenericTableModel(new GenericDAO(Album.class), Album.getPropertyNames());
         albumSorter = new TableRowSorter<>(albumTableModel);
         
