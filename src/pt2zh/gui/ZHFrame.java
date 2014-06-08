@@ -10,11 +10,14 @@ import javax.swing.JToolBar;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.TableRowSorter;
 import pt2zh.gui.tablemodels.AlbumTableModel;
+import pt2zh.gui.tablemodels.GenericTableModel;
+import pt2zh.logic.GenericDAO;
+import pt2zh.logic.entities.Album;
 
 public class ZHFrame extends JFrame {
     
-    private final AlbumTableModel albumTableModel;
-    private final TableRowSorter<AlbumTableModel> albumSorter;
+    private final GenericTableModel<Album, GenericDAO<Album>> albumTableModel;
+    private final TableRowSorter<GenericTableModel<Album, GenericDAO<Album>>> albumSorter;
 
     public ZHFrame() throws HeadlessException {
         
@@ -29,8 +32,11 @@ public class ZHFrame extends JFrame {
         JTable albumTable = new JTable();
         
         String[] fi =  {"nev","lakossag","terulte","vars","asd"};
-        albumTableModel = new AlbumTableModel();
+        albumTableModel = new GenericTableModel(new GenericDAO(Album.class), Album.getPropertyNames());
         albumSorter = new TableRowSorter<>(albumTableModel);
+        
+        albumTableModel.setColumnEditAble(2);
+        
         albumTable.setRowSorter(albumSorter);
         albumTable.setModel(albumTableModel);
        
